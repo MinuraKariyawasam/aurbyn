@@ -1,11 +1,15 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   images: {
+    unoptimized: true,
     domains: ['images.unsplash.com'],
   },
   experimental: {
-    serverActions: true,
+    serverActions: {
+      bodySizeLimit: 5 * 1024 * 1024,
+    },
   },
   env: {
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
