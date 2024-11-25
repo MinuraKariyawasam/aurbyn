@@ -1,11 +1,9 @@
 // app/page.tsx
 import { Metadata } from 'next'
-import Navbar from '../app/components/shared/Navbar'
 import Hero from '../app/components/home/Hero'
 import InvestmentThesis from '../app/components/home/InvestmentThesis'
 import FocusAreas from '../app/components/home/FocusAreas'
 import CTASection from '../app/components/shared/CTASection'
-import Footer from './components/shared/Footer'
 
 export const metadata: Metadata = {
   title: 'Aurbyn - Shaping the Future of Innovation',
