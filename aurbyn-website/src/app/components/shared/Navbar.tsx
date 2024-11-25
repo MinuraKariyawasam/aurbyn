@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 
 const navigation = [
-  { name: 'Ventures', href: '/' },
+  { name: 'Ventures', href: '/ventures' },
   { name: 'Interra', href: '/interra' },
   { name: 'Approach', href: '/approach' },
   { name: 'Contact', href: '/contact' },
