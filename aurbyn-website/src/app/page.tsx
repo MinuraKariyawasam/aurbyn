@@ -1,34 +1,63 @@
-// app/page.tsx
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Hero from '../app/components/home/Hero'
 import InvestmentThesis from '../app/components/home/InvestmentThesis'
+import InvestmentApproach from '../app/components/home/InvestmentApproach'
 import FocusAreas from '../app/components/home/FocusAreas'
 import SubBrands from '../app/components/home/SubBrands'
-import WhyAurbyn from '../app/components/home/WhyAurbyn'
-import GlobalPresence from '../app/components/home/GlobalPresence'
+import FAQ from '../app/components/home/FAQ'
 import CTASection from '../app/components/shared/CTASection'
 
 export const metadata: Metadata = {
-  title: 'Aurbyn - Shaping the Future of Innovation',
-  description: 'Strategic capital and acceleration for visionary startups transforming industries'
+  title: 'Aurbyn Capital - Backing the Next Wave of Tech Pioneers',
+  description: 'A new venture capital firm providing strategic capital and hands-on support to early-stage founders building breakthrough technologies.'
 }
 
 export default function Home() {
   return (
-    <main className="overflow-hidden">
-      <Hero />
-      <InvestmentThesis />
-      <FocusAreas />
-      <SubBrands />
-      <WhyAurbyn />
-      <GlobalPresence />
-      <CTASection 
-        title="Ready to Shape the Future Together?" 
-        description="Join us in building the next generation of transformative companies."
-        buttonText="Connect With Us"
-        buttonLink="/contact"
-      />
+    <main className="relative overflow-hidden">
+      {/* Background gradient that spans multiple sections */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#2E294E] via-white to-white"/>
+      
+      {/* Content */}
+      <div className="relative">
+        <Hero />
+        
+        {/* Thesis section with overlap effect */}
+        <div className="relative -mt-20">
+          <InvestmentThesis />
+        </div>
+        
+        {/* Approach section with subtle connection to thesis */}
+        <div className="relative -mt-16 bg-gradient-to-b from-transparent to-gray-50">
+          <InvestmentApproach />
+        </div>
+        
+        {/* Focus Areas with clean transition */}
+        <div className="relative bg-white">
+          <FocusAreas />
+        </div>
+        
+        {/* Sub Brands with subtle background pattern */}
+        <div className="relative bg-gray-50">
+          <SubBrands />
+        </div>
+        
+        {/* FAQ section with clean design */}
+        <div className="relative bg-white">
+          <FAQ />
+        </div>
+        
+        {/* CTA with gradient background */}
+        <div className="relative bg-gradient-to-br from-[#2E294E] via-[#1B998B] to-[#2E294E]">
+          <CTASection 
+            title="Ready to Build the Future?" 
+            description="Connect with us to explore how we can support your vision."
+            buttonText="Get in Touch"
+            buttonLink="/contact"
+          />
+        </div>
+      </div>
     </main>
   )
 }

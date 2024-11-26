@@ -6,58 +6,88 @@ import { Brain, Rocket, Database, Atom, ChevronRight, TrendingUp, Globe } from '
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface AreaFeature {
+  title: string;
+  description: string;
+  icon: JSX.Element;
+  gradient: string;
+  stats: {
+    growth: string;
+    market: string;
+  };
+  features: string[];
+}
+
 const areas = [
   {
     title: "AI & Machine Learning",
-    description: "Pioneering next-generation AI solutions that redefine industry standards and push technological boundaries through innovative approaches to machine learning and cognitive systems.",
+    description: "Supporting founders building practical AI applications that solve real business problems and create tangible value.",
     icon: <Brain className="w-8 h-8" />,
     gradient: "from-primary via-secondary to-accent",
     stats: {
-      growth: "138%",
-      market: "$62B"
+      growth: "43%",
+      market: "$15B"
     },
-    features: ["Natural Language Processing", "Computer Vision", "Predictive Analytics"]
+    features: [
+      "Enterprise AI Solutions",
+      "AI Infrastructure",
+      "Machine Learning Tools"
+    ]
   },
   {
-    title: "FinTech Innovation",
-    description: "Revolutionary financial platforms leveraging blockchain, DeFi, and emerging technologies to reshape the future of global finance and economic systems.",
+    title: "Web3 & Blockchain",
+    description: "Investing in next-generation blockchain infrastructure and applications that prioritize real-world utility and adoption.",
     icon: <Database className="w-8 h-8" />,
     gradient: "from-secondary via-accent to-primary",
     stats: {
-      growth: "156%",
-      market: "$47B"
+      growth: "38%",
+      market: "$12B"
     },
-    features: ["Blockchain Solutions", "DeFi Platforms", "Payment Infrastructure"]
+    features: [
+      "DeFi Infrastructure",
+      "Enterprise Blockchain",
+      "Web3 Tools"
+    ]
   },
   {
-    title: "Enterprise SaaS",
-    description: "Cloud-native solutions empowering the next generation of business transformation through scalable, intelligent platforms and services.",
+    title: "Developer Tools",
+    description: "Backing innovative tools and platforms that enhance developer productivity and enable better software creation.",
     icon: <Rocket className="w-8 h-8" />,
     gradient: "from-accent via-primary to-secondary",
     stats: {
-      growth: "124%",
-      market: "$85B"
+      growth: "35%",
+      market: "$18B"
     },
-    features: ["Cloud Infrastructure", "Data Analytics", "Business Intelligence"]
+    features: [
+      "Development Platforms",
+      "DevOps Solutions",
+      "API Infrastructure"
+    ]
   },
   {
-    title: "Deep Tech",
-    description: "Breakthrough technologies tackling humanity's most complex challenges through quantum computing, biotech, and advanced materials science.",
+    title: "Emerging Tech",
+    description: "Exploring promising technologies in quantum computing, edge computing, and other frontier tech areas.",
     icon: <Atom className="w-8 h-8" />,
     gradient: "from-primary to-secondary",
     stats: {
-      growth: "142%",
-      market: "$56B"
+      growth: "41%",
+      market: "$9B"
     },
-    features: ["Quantum Computing", "Biotech Innovation", "Material Science"]
+    features: [
+      "Quantum Technologies",
+      "Edge Computing",
+      "Advanced Materials"
+    ]
   }
 ];
 
 export default function FocusAreas() {
-  const containerRef = useRef(null);
-  const timelineRefs = useRef([]);
+  const containerRef = useRef<HTMLElement>(null);
+  const timelineRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
+    if (!containerRef.current) return;
+
     const ctx = gsap.context(() => {
       // Animate the connecting line
       gsap.from(".timeline-line", {
@@ -85,6 +115,8 @@ export default function FocusAreas() {
 
       // Animate each timeline item
       timelineRefs.current.forEach((item, index) => {
+        if (!item) return;
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: item,
@@ -93,24 +125,30 @@ export default function FocusAreas() {
           }
         });
 
-        tl.from(item.querySelector(".timeline-icon"), {
-          scale: 0,
-          duration: 0.6,
-          ease: "back.out(1.7)"
-        })
-        .from(item.querySelector(".timeline-content"), {
-          x: index % 2 === 0 ? -50 : 50,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out"
-        }, "-=0.3")
-        .from(item.querySelectorAll(".feature-item"), {
-          y: 20,
-          opacity: 0,
-          duration: 0.4,
-          stagger: 0.1,
-          ease: "power2.out"
-        }, "-=0.4");
+        const icon = item.querySelector(".timeline-icon");
+        const content = item.querySelector(".timeline-content");
+        const features = item.querySelectorAll(".feature-item");
+
+        if (icon && content) {
+          tl.from(icon, {
+            scale: 0,
+            duration: 0.6,
+            ease: "back.out(1.7)"
+          })
+          .from(content, {
+            x: index % 2 === 0 ? -50 : 50,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out"
+          }, "-=0.3")
+          .from(features, {
+            y: 20,
+            opacity: 0,
+            duration: 0.4,
+            stagger: 0.1,
+            ease: "power2.out"
+          }, "-=0.4");
+        }
       });
     });
 

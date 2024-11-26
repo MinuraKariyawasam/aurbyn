@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from 'react';
-import { ArrowUpRight, Sparkles, Globe, Target, Rocket, Orbit, Constellation, Gauge } from 'lucide-react';
+import { Sparkles, Globe, Target, Rocket, Orbit, Gauge, Brain } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -8,52 +8,54 @@ gsap.registerPlugin(ScrollTrigger);
 
 const orbitalStages = [
   {
-    title: "Launch Pad Program",
+    title: "Early Innovation",
     stage: "Pre-Seed",
-    description: "Initial thrust for emerging ventures, providing foundational support and resources.",
+    description: "Supporting visionary founders at the earliest stages with initial capital and strategic guidance.",
     icon: <Rocket className="w-6 h-6 text-[#1B998B]" />,
-    investment: "Up to $250K"
+    investment: "Up to $500K"
   },
   {
-    title: "Trajectory Enhancement",
+    title: "Growth Foundation",
     stage: "Seed",
-    description: "Accelerating growth with strategic capital and operational expertise.",
+    description: "Building robust foundations with hands-on support and meaningful capital deployment.",
     icon: <Gauge className="w-6 h-6 text-[#1B998B]" />,
-    investment: "$250K - $500K"
+    investment: "$500K - $1M"
   },
   {
-    title: "Orbital Stabilization",
+    title: "Scale Acceleration",
     stage: "Series A",
-    description: "Establishing market position and scaling operations systematically.",
+    description: "Accelerating market penetration and team expansion with substantial capital injection.",
     icon: <Orbit className="w-6 h-6 text-[#1B998B]" />,
-    investment: "$500K - $2M"
+    investment: "$1M - $2M"
   }
 ];
 
 const thesisPoints = [
   {
-    title: "Future-First Technologies",
-    description: "Pioneering breakthrough solutions in AI, quantum computing, and emerging technologies that fundamentally reshape industries.",
+    title: "Technical Innovation Focus",
+    description: "We back founders building foundational technologies in AI, blockchain, and emerging tech sectors that solve real-world problems.",
     icon: <Sparkles className="w-6 h-6 text-[#1B998B]" />
   },
   {
-    title: "Sustainable Innovation",
-    description: "Backing ventures that combine technological advancement with positive global impact, ensuring long-term sustainability.",
+    title: "First-Principles Thinking",
+    description: "We seek teams that challenge conventional wisdom and approach problems with fresh, innovative perspectives.",
     icon: <Globe className="w-6 h-6 text-[#1B998B]" />
   },
   {
-    title: "Global Scale",
-    description: "Supporting visionary founders building solutions with worldwide market potential and industry-transforming capabilities.",
+    title: "Scalable Impact",
+    description: "Our investments target solutions with potential for exponential growth and meaningful industry impact.",
     icon: <Target className="w-6 h-6 text-[#1B998B]" />
   }
 ];
 
 export default function InvestmentThesis() {
   const containerRef = useRef(null);
-  const orbitalRef = useRef(null);
+  const thesisRef = useRef(null);
+  const stagesRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Animation logic remains the same
       gsap.from(".thesis-card", {
         scrollTrigger: {
           trigger: ".thesis-container",
@@ -67,9 +69,9 @@ export default function InvestmentThesis() {
         ease: "power3.out"
       });
 
-      gsap.from(".orbital-stage", {
+      gsap.from(".investment-stage", {
         scrollTrigger: {
-          trigger: ".orbital-container",
+          trigger: ".stages-container",
           start: "top center",
           toggleActions: "play none none reverse"
         },
@@ -86,7 +88,6 @@ export default function InvestmentThesis() {
 
   return (
     <section ref={containerRef} className="py-32 bg-white relative overflow-hidden">
-      {/* Constellation Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute w-full h-full" style={{
           backgroundImage: `radial-gradient(circle at 25% 25%, #2E294E 1px, transparent 1px), 
@@ -99,8 +100,8 @@ export default function InvestmentThesis() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div className="thesis-container">
             <div className="mb-12">
-              <h2 className="text-4xl font-bold text-[#2E294E] mb-4">Investment Thesis</h2>
-              <p className="text-gray-600 text-lg">Pioneering the future through strategic investments in transformative technologies</p>
+              <h2 className="text-4xl font-bold text-[#2E294E] mb-4">Investment Focus</h2>
+              <p className="text-gray-600 text-lg">Backing technical founders building the next generation of transformative technologies</p>
             </div>
             
             <div className="space-y-6">
@@ -122,15 +123,15 @@ export default function InvestmentThesis() {
             </div>
           </div>
           
-          <div className="orbital-container">
+          <div className="stages-container">
             <div className="mb-12">
-              <h2 className="text-4xl font-bold text-[#2E294E] mb-4">The Orbital Approach</h2>
-              <p className="text-gray-600 text-lg">Our systematic framework for nurturing startups from inception to market leadership</p>
+              <h2 className="text-4xl font-bold text-[#2E294E] mb-4">Investment Strategy</h2>
+              <p className="text-gray-600 text-lg">A focused approach to early-stage technology investments</p>
             </div>
 
             <div className="space-y-6">
               {orbitalStages.map((stage, index) => (
-                <div key={index} className="orbital-stage group">
+                <div key={index} className="investment-stage group">
                   <div className="p-8 rounded-xl bg-white hover:shadow-xl transition-all duration-300 border border-gray-100">
                     <div className="flex items-center justify-between mb-4">
                       <div className="p-3 bg-gray-50 rounded-lg group-hover:bg-[#2E294E]/5 transition-colors duration-300">

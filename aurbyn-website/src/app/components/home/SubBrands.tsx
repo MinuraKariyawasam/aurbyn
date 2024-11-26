@@ -9,45 +9,45 @@ gsap.registerPlugin(ScrollTrigger);
 const subBrands = [
   {
     name: "Aurbyn Ventures",
-    description: "Our flagship investment arm focused on identifying and nurturing the next generation of technological breakthroughs.",
+    description: "Our flagship fund focused on early-stage investments in transformative technologies, with a focus on Pre-Seed to Series A rounds.",
     icon: <Building2 className="w-8 h-8" />,
     tagline: "Investment Arm",
     stats: {
-      investments: "50+",
-      fundSize: "$100M+"
+      targetDeals: "15-20",
+      checkSize: "$0.5-2M"
     },
     color: "primary"
   },
   {
     name: "Aurbyn Labs",
-    description: "Innovation hub dedicated to accelerating technological advancement through research and development.",
+    description: "Our technical due diligence and research team, providing deep technical insights and validation for potential investments.",
     icon: <FlaskConical className="w-8 h-8" />,
-    tagline: "Innovation Hub",
+    tagline: "Technical Hub",
     stats: {
-      projects: "25+",
-      patents: "15+"
+      expertise: "5+",
+      sectors: "4+"
     },
     color: "secondary"
   },
   {
     name: "Aurbyn Academy",
-    description: "Educational platform empowering founders and teams with knowledge and resources for sustained success.",
+    description: "Educational platform empowering founders and teams with knowledge and resources for sustained success through our YouTube channel.",
     icon: <GraduationCap className="w-8 h-8" />,
     tagline: "Knowledge Platform",
     stats: {
-      graduates: "1000+",
-      courses: "30+"
+      subscribers: "1000+",
+      content: "30+"
     },
     color: "accent"
   },
   {
-    name: "Aurbyn X",
-    description: "Future-focused initiative exploring cutting-edge technologies and moonshot opportunities.",
+    name: "Aurbyn Networks",
+    description: "Our growing network of industry experts, technical advisors, and strategic partners supporting portfolio success.",
     icon: <Rocket className="w-8 h-8" />,
-    tagline: "Future Ventures",
+    tagline: "Strategic Network",
     stats: {
-      initiatives: "10+",
-      success: "85%"
+      experts: "25+",
+      partners: "10+"
     },
     color: "primary"
   }
@@ -61,7 +61,7 @@ export default function SubBrands() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate central element
+      // Animations remain the same
       gsap.from(centralRef.current, {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -73,7 +73,6 @@ export default function SubBrands() {
         ease: "power3.out"
       });
 
-      // Animate connection lines
       lineRefs.current.forEach((line, index) => {
         gsap.from(line, {
           scrollTrigger: {
@@ -87,7 +86,6 @@ export default function SubBrands() {
         });
       });
 
-      // Animate content sections
       contentRefs.current.forEach((content, index) => {
         gsap.from(content, {
           scrollTrigger: {
@@ -101,7 +99,6 @@ export default function SubBrands() {
           ease: "power3.out"
         });
 
-        // Continuous subtle float animation
         gsap.to(content, {
           y: "10px",
           duration: 2,
@@ -121,16 +118,14 @@ export default function SubBrands() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
           <h2 className="text-5xl font-bold text-primary mb-6">
-            Ecosystem Elements
+            Our Ecosystem
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            An integrated network of innovation platforms
+            A comprehensive support system for transformative startups
           </p>
         </div>
 
-        {/* Central Hub + Connected Elements */}
         <div className="relative">
-          {/* Central Hub */}
           <div 
             ref={centralRef}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48"
@@ -140,20 +135,18 @@ export default function SubBrands() {
               <div className="absolute inset-4 rounded-full bg-white shadow-lg flex items-center justify-center">
                 <div className="text-center">
                   <Plus className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <span className="text-sm font-medium text-gray-600">Aurbyn Network</span>
+                  <span className="text-sm font-medium text-gray-600">Aurbyn Capital</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Connected Elements */}
           <div className="grid grid-cols-2 gap-x-32 gap-y-16">
             {subBrands.map((brand, index) => (
               <div
                 key={brand.name}
                 className={`relative ${index % 2 === 0 ? 'text-right' : 'text-left'}`}
               >
-                {/* Connection Line */}
                 <div
                   ref={el => lineRefs.current[index] = el}
                   className="absolute top-1/2 h-px bg-gradient-to-r from-primary/20 to-secondary/20"
@@ -164,7 +157,6 @@ export default function SubBrands() {
                   }}
                 ></div>
 
-                {/* Content */}
                 <div
                   ref={el => contentRefs.current[index] = el}
                   className={`inline-block max-w-sm ${index % 2 === 0 ? 'pr-32' : 'pl-32'}`}

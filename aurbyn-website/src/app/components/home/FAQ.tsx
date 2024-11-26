@@ -8,39 +8,38 @@ gsap.registerPlugin(ScrollTrigger);
 
 const faqs = [
   {
-    question: "What areas do you invest in?",
-    answer: "We focus on AI & Machine Learning, FinTech Innovation, Enterprise SaaS, and Deep Tech, with typical investment sizes ranging from $1M to $10M in early-stage companies."
+    question: "What types of companies do you invest in?",
+    answer: "We focus on early-stage technology companies, primarily in AI/ML, blockchain, developer tools, and emerging tech sectors. We look for strong technical founders building innovative solutions with clear market potential."
+  },
+  {
+    question: "What are your typical investment terms?",
+    answer: "We typically invest between $500K to $2M in pre-seed to Series A rounds. Our terms are founder-friendly and standardized, focusing on clear alignment between founders and investors."
   },
   {
     question: "How do you support portfolio companies?",
-    answer: "Beyond capital, we provide comprehensive support through our Aurbyn Network, including access to technical expertise, market insights, and strategic partnerships."
-  },
-  {
-    question: "What makes Aurbyn different?",
-    answer: "Our unique combination of deep technical expertise, global network, and founder-first approach enables us to be true partners in building transformative companies."
+    answer: "Beyond capital, we provide technical expertise, strategic guidance, and access to our network of industry experts and potential customers. Our team has hands-on experience in building and scaling technology companies."
   },
   {
     question: "What is your investment process?",
-    answer: "We follow a structured yet flexible process, starting with initial discussions, followed by deep technical and business diligence, and culminating in a partnership designed for long-term success."
+    answer: "Our process typically takes 4-6 weeks, involving initial screening, technical deep dive, market analysis, and founder discussions. We aim to be transparent and efficient throughout the process."
   },
   {
-    question: "How do you work with founders?",
-    answer: "We believe in being active, supportive partners while respecting founder autonomy. Our team provides hands-on support in areas like technical development, go-to-market strategy, and talent acquisition."
+    question: "Do you lead rounds?",
+    answer: "Yes, we can lead or co-lead rounds. We also work closely with other investors in our network to help companies build strong syndicates."
   },
   {
-    question: "What stage companies do you invest in?",
-    answer: "We primarily invest in early-stage companies, from seed to Series B, with a focus on companies that are leveraging cutting-edge technology to solve significant problems."
+    question: "What makes Aurbyn different?",
+    answer: "Our technical expertise, founder-first approach, and focus on practical support sets us apart. We're building a new kind of VC firm that truly understands and supports technical founders."
+  },
+  {
+    question: "How do you work with founders post-investment?",
+    answer: "We maintain regular engagement with portfolio companies, offering support in areas like technical development, go-to-market strategy, and talent acquisition. Our involvement is always founder-driven."
   },
   {
     question: "What is your geographical focus?",
-    answer: "While we have a global perspective and network, we focus on companies in major technology hubs across North America, Europe, and Asia."
-  },
-  {
-    question: "What is the typical investment timeline?",
-    answer: "From initial contact to investment, the process typically takes 6-12 weeks, depending on the stage and complexity of the opportunity."
+    answer: "We primarily invest in companies based in major technology hubs across North America, with a particular focus on the US and Canada. We're open to exceptional opportunities globally."
   }
 ];
-
 export default function FAQ() {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
