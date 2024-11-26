@@ -61,7 +61,9 @@ export default function SubBrands() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animations remain the same
+      // Modify animations for mobile
+      const isMobile = window.innerWidth < 768;
+
       gsap.from(centralRef.current, {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -73,59 +75,78 @@ export default function SubBrands() {
         ease: "power3.out"
       });
 
-      lineRefs.current.forEach((line, index) => {
-        gsap.from(line, {
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top center",
-          },
-          scaleX: 0,
-          duration: 1,
-          delay: 0.5 + index * 0.2,
-          ease: "power3.out"
-        });
-      });
-
-      contentRefs.current.forEach((content, index) => {
-        gsap.from(content, {
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top center",
-          },
-          x: index % 2 === 0 ? -50 : 50,
-          opacity: 0,
-          duration: 1,
-          delay: 0.8 + index * 0.2,
-          ease: "power3.out"
+      if (!isMobile) {
+        // Desktop animations remain the same
+        lineRefs.current.forEach((line, index) => {
+          gsap.from(line, {
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top center",
+            },
+            scaleX: 0,
+            duration: 1,
+            delay: 0.5 + index * 0.2,
+            ease: "power3.out"
+          });
         });
 
-        gsap.to(content, {
-          y: "10px",
-          duration: 2,
-          repeat: -1,
-          yoyo: true,
-          ease: "power1.inOut",
-          delay: index * 0.3
+        contentRefs.current.forEach((content, index) => {
+          gsap.from(content, {
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top center",
+            },
+            x: index % 2 === 0 ? -50 : 50,
+            opacity: 0,
+            duration: 1,
+            delay: 0.8 + index * 0.2,
+            ease: "power3.out"
+          });
+
+          gsap.to(content, {
+            y: "10px",
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+            delay: index * 0.3
+          });
         });
-      });
+      } else {
+        // Mobile-specific animations
+        contentRefs.current.forEach((content, index) => {
+          gsap.from(content, {
+            scrollTrigger: {
+              trigger: content,
+              start: "top center+=100",
+            },
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            delay: index * 0.2
+          });
+        });
+      }
     });
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="py-32 bg-white relative">
+    <section ref={containerRef} className="py-16 md:py-32 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl font-bold text-primary mb-6">
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="text-3xl md:text-5xl font-bold text-primary mb-4 md:mb-6">
             Our Ecosystem
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-2">
             A comprehensive support system for transformative startups
           </p>
         </div>
 
-        <div className="relative">
+        {/* Central Icon - Hidden on mobile */}
+        <div className="hidden md:block relative">
           <div 
             ref={centralRef}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48"
@@ -141,7 +162,8 @@ export default function SubBrands() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-32 gap-y-16">
+          {/* Desktop Grid */}
+          <div className="hidden md:grid grid-cols-2 gap-x-32 gap-y-16">
             {subBrands.map((brand, index) => (
               <div
                 key={brand.name}
@@ -189,6 +211,52 @@ export default function SubBrands() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Mobile Layout */}
+        <div className="md:hidden space-y-8">
+          {/* Central Icon for Mobile */}
+          <div className="relative w-32 h-32 mx-auto mb-12">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-secondary to-accent opacity-10 animate-pulse"></div>
+            <div className="absolute inset-2 rounded-full bg-white shadow-lg flex items-center justify-center">
+              <div className="text-center">
+                <Plus className="w-6 h-6 text-primary mx-auto mb-1" />
+                <span className="text-xs font-medium text-gray-600">Aurbyn Capital</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Cards */}
+          {subBrands.map((brand, index) => (
+            <div
+              key={brand.name}
+              ref={el => contentRefs.current[index] = el}
+              className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6"
+            >
+              <div className={`p-3 inline-block bg-${brand.color}/5 rounded-lg mb-3`}>
+                {brand.icon}
+              </div>
+              
+              <h3 className="text-xl font-bold text-primary mb-2">
+                {brand.name}
+              </h3>
+              
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                {brand.description}
+              </p>
+              
+              <div className="grid grid-cols-2 gap-4 text-center">
+                {Object.entries(brand.stats).map(([key, value]) => (
+                  <div key={key} className="bg-gray-50 rounded-lg p-3">
+                    <p className="text-lg font-bold text-secondary mb-1">{value}</p>
+                    <p className="text-xs text-gray-500 capitalize">
+                      {key.replace(/([A-Z])/g, ' $1').trim()}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

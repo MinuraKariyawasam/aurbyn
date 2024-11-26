@@ -36,12 +36,8 @@ export default function Footer() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Here you would typically send the email to your backend service
-    // For now, we'll just show the success message
     setIsSubscribed(true)
     setEmail('')
-
-    // Reset the success message after 3 seconds
     setTimeout(() => {
       setIsSubscribed(false)
     }, 3000)
@@ -58,30 +54,30 @@ export default function Footer() {
         }}/>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <div className="relative w-full max-w-7xl mx-auto px-4 pt-12 pb-8 sm:px-6 sm:pt-16 sm:pb-12 lg:px-8">
         {/* Newsletter Section - Centered */}
-        <div className="max-w-2xl mx-auto text-center mb-16 relative">
-          <h3 className="text-xl font-semibold text-[#1B998B] mb-4">
+        <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16 relative">
+          <h3 className="text-lg sm:text-xl font-semibold text-[#1B998B] mb-3 sm:mb-4">
             Join Our Newsletter
           </h3>
-          <p className="text-gray-300 text-lg mb-8 max-w-xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-300 mb-6 sm:mb-8 max-w-xl mx-auto px-2">
             Stay ahead with insights on emerging technologies, investment trends, and industry innovations.
           </p>
-          <form onSubmit={handleSubmit} className="relative max-w-md mx-auto">
+          <form onSubmit={handleSubmit} className="relative max-w-md mx-auto px-2">
             <div className="relative group">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-4 pr-12 py-3.5 text-white placeholder-gray-400 
+                className="w-full bg-white/5 border border-white/10 rounded-xl pl-4 pr-12 py-3 sm:py-3.5 text-white placeholder-gray-400 
                   focus:outline-none focus:ring-2 focus:ring-[#1B998B]/50 focus:border-transparent
                   transition-all duration-300 group-hover:border-white/20"
                 required
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2.5 bg-[#1B998B] rounded-lg 
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 sm:p-2.5 bg-[#1B998B] rounded-lg 
                   hover:bg-[#1B998B]/80 transition-all duration-300 group-hover:scale-95 hover:rotate-12"
               >
                 <Send className="w-4 h-4" />
@@ -98,20 +94,20 @@ export default function Footer() {
         </div>
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 mb-12 sm:mb-16">
           {/* Brand section */}
-          <div className="lg:col-span-1">
+          <div className="text-center lg:text-left">
             <Link href="/" className="inline-block">
-              <div className="text-2xl font-bold text-white mb-4">AURBYN</div>
+              <div className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">AURBYN</div>
             </Link>
-            <p className="text-gray-300 mb-6 max-w-sm">
+            <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6 max-w-sm mx-auto lg:mx-0">
               Strategic capital and acceleration for visionary startups transforming industries through groundbreaking technology.
             </p>
-            <div className="space-y-2 text-sm text-gray-300">
+            <div className="space-y-1 sm:space-y-2 text-sm text-gray-300">
               <p>{office.location}</p>
               <a 
                 href={`mailto:${office.email}`}
-                className="hover:text-[#1B998B] transition-colors duration-300"
+                className="hover:text-[#1B998B] transition-colors duration-300 inline-block"
               >
                 {office.email}
               </a>
@@ -119,7 +115,7 @@ export default function Footer() {
           </div>
 
           {/* Navigation Links */}
-          <div className="grid grid-cols-2 gap-8 lg:col-span-2">
+          <div className="grid grid-cols-2 gap-8 lg:col-span-2 text-center lg:text-left">
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-wider text-[#1B998B] mb-4">
                 Company
@@ -129,7 +125,7 @@ export default function Footer() {
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="group flex items-center text-gray-300 hover:text-white transition-colors duration-300"
+                      className="group inline-flex items-center text-gray-300 hover:text-white transition-colors duration-300"
                     >
                       <span className="relative">
                         {item.name}
@@ -150,7 +146,7 @@ export default function Footer() {
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="group flex items-center text-gray-300 hover:text-white transition-colors duration-300"
+                      className="group inline-flex items-center text-gray-300 hover:text-white transition-colors duration-300"
                     >
                       <span className="relative">
                         {item.name}
@@ -166,10 +162,10 @@ export default function Footer() {
         </div>
 
         {/* Social Links and Copyright */}
-        <div className="mt-16 pt-8 border-t border-white/10">
-          <div className="flex flex-col items-center justify-center space-y-6">
+        <div className="pt-6 sm:pt-8 border-t border-white/10">
+          <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-6">
             {/* Social Links */}
-            <div className="flex justify-center space-x-6">
+            <div className="flex justify-center space-x-4 sm:space-x-6">
               {footerLinks.social.map((item) => {
                 const Icon = item.icon
                 return (
@@ -186,15 +182,21 @@ export default function Footer() {
               })}
             </div>
             
-            {/* Copyright Info */}
-            <div className="flex items-center justify-center space-x-2 text-sm text-gray-400">
-              <span>🇱🇰</span>
-              <span>Founded with love in Sri Lanka</span>
-              <span>•</span>
-              <span>🌎</span>
-              <span>Operating Globally</span>
+            {/* Location Info */}
+            <div className="flex flex-col sm:flex-row items-center justify-center sm:space-x-2 space-y-2 sm:space-y-0 text-xs sm:text-sm text-gray-400">
+              <div className="flex items-center space-x-2">
+                <span>🇱🇰</span>
+                <span>Founded with love in Sri Lanka</span>
+              </div>
+              <span className="hidden sm:inline">•</span>
+              <div className="flex items-center space-x-2">
+                <span>🌎</span>
+                <span>Operating Globally</span>
+              </div>
             </div>
-            <p className="text-sm text-gray-500">
+
+            {/* Copyright */}
+            <p className="text-xs sm:text-sm text-gray-500">
               &copy; {year} Aurbyn Capital. All rights reserved.
             </p>
           </div>

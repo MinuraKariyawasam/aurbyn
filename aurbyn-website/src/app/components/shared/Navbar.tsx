@@ -28,30 +28,31 @@ export default function Navbar() {
       }
     }
 
-    // Add passive event listener for better performance
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   // Improved mobile menu handling
   useEffect(() => {
-    const body = document.body
     if (mobileMenuOpen) {
-      body.style.overflow = 'hidden'
-      body.style.position = 'fixed'
-      body.style.width = '100%'
+      // When opening menu, maintain scroll position
+      document.body.style.height = '100vh'
+      document.body.style.overflowY = 'hidden'
     } else {
-      body.style.overflow = ''
-      body.style.position = ''
-      body.style.width = ''
+      // When closing menu, restore scroll
+      document.body.style.height = ''
+      document.body.style.overflowY = ''
     }
 
     return () => {
-      body.style.overflow = ''
-      body.style.position = ''
-      body.style.width = ''
+      document.body.style.height = ''
+      document.body.style.overflowY = ''
     }
   }, [mobileMenuOpen])
+
+  const toggleMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
 
   return (
     <header 
@@ -62,7 +63,7 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:p-6">
-        {/* Logo - Optimized for mobile */}
+        {/* Logo */}
         <div className="flex flex-1">
           <Link 
             href="/" 
@@ -74,19 +75,19 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile menu button - Improved touch target */}
+        {/* Mobile menu button */}
         <div className="flex lg:hidden">
           <button
             type="button"
             className="rounded-lg p-3 text-white hover:bg-white/10 transition-colors"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open menu"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
           >
             <Menu className="h-6 w-6" />
           </button>
         </div>
 
-        {/* Desktop navigation - Optimized spacing */}
+        {/* Desktop navigation */}
         <div className="hidden lg:flex lg:gap-x-6 xl:gap-x-8">
           {navigation.map((item) => (
             <Link
@@ -104,7 +105,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Desktop CTA button - Improved hover states */}
+        {/* Desktop CTA button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
             href="/contact"
@@ -119,23 +120,22 @@ export default function Navbar() {
         </div>
       </nav>
       
-      {/* Mobile menu - Improved animation and interaction */}
+      {/* Mobile menu - Fixed to viewport */}
       <div 
-        className={`fixed inset-0 z-50 transition-all duration-300 ${
+        className={`fixed inset-0 z-50 lg:hidden transition-all duration-300 ${
           mobileMenuOpen 
             ? 'opacity-100 pointer-events-auto' 
             : 'opacity-0 pointer-events-none'
         }`}
-        aria-hidden={!mobileMenuOpen}
       >
-        {/* Backdrop with blur effect */}
+        {/* Backdrop */}
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-[#2E294E]/95 via-[#1B998B]/95 to-[#2E294E]/95 backdrop-blur-sm"
-          onClick={() => setMobileMenuOpen(false)}  
+          className="fixed inset-0 bg-gradient-to-br from-[#2E294E]/95 via-[#1B998B]/95 to-[#2E294E]/95 backdrop-blur-sm"
+          onClick={() => setMobileMenuOpen(false)}
         />
         
-        {/* Content with improved mobile layout */}
-        <div className="relative h-full flex flex-col bg-[#2E294E]/98">
+        {/* Menu content */}
+        <div className="fixed inset-y-0 right-0 w-full bg-[#2E294E]/98 flex flex-col overflow-y-auto">
           <div className="flex items-center justify-between p-4">
             <Link 
               href="/" 
@@ -154,8 +154,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Navigation Links with improved touch targets */}
-          <nav className="flex-1 overflow-y-auto px-4 py-6">
+          <nav className="flex-1 px-4 py-6">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -177,7 +176,6 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Mobile CTA Button with improved touch interaction */}
           <div className="px-4 py-6 border-t border-white/10">
             <Link
               href="/contact"
