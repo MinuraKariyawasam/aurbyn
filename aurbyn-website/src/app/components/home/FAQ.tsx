@@ -40,11 +40,12 @@ const faqs = [
     answer: "We primarily invest in companies based in major technology hubs across North America, with a particular focus on the US and Canada. We're open to exceptional opportunities globally."
   }
 ];
+
 export default function FAQ() {
-  const sectionRef = useRef(null);
-  const headingRef = useRef(null);
-  const faqRefs = useRef([]);
-  const [activeIndex, setActiveIndex] = useState(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const headingRef = useRef<HTMLHeadingElement | null>(null);
+  const faqRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -79,7 +80,7 @@ export default function FAQ() {
     return () => ctx.revert();
   }, []);
 
-  const toggleFAQ = (index: number | null) => {
+  const toggleFAQ = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
