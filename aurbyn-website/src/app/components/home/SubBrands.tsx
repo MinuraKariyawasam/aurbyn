@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, RefCallback } from 'react';
 import { Building2, FlaskConical, GraduationCap, Rocket, ArrowRight, Plus } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -54,30 +54,49 @@ const subBrands = [
 ];
 
 export default function SubBrands() {
-  const containerRef = useRef(null);
-  const contentRefs = useRef([]);
-  const lineRefs = useRef([]);
-  const centralRef = useRef(null);
+  const containerRef = useRef<HTMLElement | null>(null);
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const centralRef = useRef<HTMLDivElement | null>(null);
+
+  const setContentRef: RefCallback<HTMLDivElement> = (element: HTMLDivElement | null) => {
+    if (element) {
+      const index = parseInt(element.getAttribute('data-index') || '0');
+      contentRefs.current[index] = element;
+    }
+  };
+
+  const setLineRef: RefCallback<HTMLDivElement> = (element: HTMLDivElement | null) => {
+    if (element) {
+      const index = parseInt(element.getAttribute('data-index') || '0');
+      lineRefs.current[index] = element;
+    }
+  };
 
   useEffect(() => {
+    if (!containerRef.current) return;
+
     const ctx = gsap.context(() => {
       // Modify animations for mobile
       const isMobile = window.innerWidth < 768;
 
-      gsap.from(centralRef.current, {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top center",
-        },
-        scale: 0,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
-      });
+      if (centralRef.current) {
+        gsap.from(centralRef.current, {
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top center",
+          },
+          scale: 0,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out"
+        });
+      }
 
       if (!isMobile) {
         // Desktop animations remain the same
         lineRefs.current.forEach((line, index) => {
+          if (!line) return;
           gsap.from(line, {
             scrollTrigger: {
               trigger: containerRef.current,
@@ -91,6 +110,7 @@ export default function SubBrands() {
         });
 
         contentRefs.current.forEach((content, index) => {
+          if (!content) return;
           gsap.from(content, {
             scrollTrigger: {
               trigger: containerRef.current,
@@ -115,6 +135,7 @@ export default function SubBrands() {
       } else {
         // Mobile-specific animations
         contentRefs.current.forEach((content, index) => {
+          if (!content) return;
           gsap.from(content, {
             scrollTrigger: {
               trigger: content,
@@ -170,7 +191,8 @@ export default function SubBrands() {
                 className={`relative ${index % 2 === 0 ? 'text-right' : 'text-left'}`}
               >
                 <div
-                  ref={el => lineRefs.current[index] = el}
+                  data-index={index}
+                  ref={setLineRef}
                   className="absolute top-1/2 h-px bg-gradient-to-r from-primary/20 to-secondary/20"
                   style={{
                     [index % 2 === 0 ? 'right' : 'left']: '0',
@@ -180,7 +202,8 @@ export default function SubBrands() {
                 ></div>
 
                 <div
-                  ref={el => contentRefs.current[index] = el}
+                  data-index={index}
+                  ref={setContentRef}
                   className={`inline-block max-w-sm ${index % 2 === 0 ? 'pr-32' : 'pl-32'}`}
                 >
                   <div className="relative">
@@ -230,7 +253,8 @@ export default function SubBrands() {
           {subBrands.map((brand, index) => (
             <div
               key={brand.name}
-              ref={el => contentRefs.current[index] = el}
+              data-index={index}
+              ref={setContentRef}
               className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6"
             >
               <div className={`p-3 inline-block bg-${brand.color}/5 rounded-lg mb-3`}>

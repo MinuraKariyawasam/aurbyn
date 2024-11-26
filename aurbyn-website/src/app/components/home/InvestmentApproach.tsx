@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, RefCallback } from 'react';
 import { TrendingUp, Users, Lightbulb, Network } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -50,13 +50,22 @@ const approachElements = [
 ];
 
 export default function InvestmentApproach() {
-  const containerRef = useRef(null);
-  const elementRefs = useRef([]);
+  const containerRef = useRef<HTMLElement | null>(null);
+  const elementRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const setElementRef: RefCallback<HTMLDivElement> = (element: HTMLDivElement | null) => {
+    if (element) {
+      const index = parseInt(element.getAttribute('data-index') || '0');
+      elementRefs.current[index] = element;
+    }
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Stagger animation for elements
       elementRefs.current.forEach((element, index) => {
+        if (!element) return;
+        
         gsap.from(element, {
           scrollTrigger: {
             trigger: element,
@@ -90,7 +99,8 @@ export default function InvestmentApproach() {
           {approachElements.map((element, index) => (
             <div
               key={element.title}
-              ref={el => elementRefs.current[index] = el}
+              data-index={index}
+              ref={setElementRef}
               className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300"
             >
               <div className="flex items-start space-x-6">

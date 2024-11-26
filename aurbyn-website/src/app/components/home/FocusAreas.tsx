@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, RefCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Brain, Rocket, Database, Atom, ChevronRight, TrendingUp, Globe } from 'lucide-react';
@@ -17,6 +17,8 @@ interface AreaFeature {
   };
   features: string[];
 }
+
+
 
 const areas = [
   {
@@ -84,6 +86,13 @@ const areas = [
 export default function FocusAreas() {
   const containerRef = useRef<HTMLElement>(null);
   const timelineRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const setTimelineRef: RefCallback<HTMLDivElement> = (element: HTMLDivElement | null) => {
+    if (element) {
+      const index = parseInt(element.getAttribute('data-index') || '0');
+      timelineRefs.current[index] = element;
+    }
+  };
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -186,14 +195,15 @@ export default function FocusAreas() {
           <div className="relative">
             {areas.map((area, index) => (
               <div
-                key={area.title}
-                ref={el => timelineRefs.current[index] = el}
-                className={`timeline-item mb-12 md:mb-24 ${
-                  index % 2 === 0 
-                    ? "md:flex-row" 
-                    : "md:flex-row-reverse"
-                } flex flex-col md:flex items-center gap-4 md:gap-8`}
-              >
+              key={area.title}
+              data-index={index}
+              ref={setTimelineRef}
+              className={`timeline-item mb-12 md:mb-24 ${
+                index % 2 === 0 
+                  ? "md:flex-row" 
+                  : "md:flex-row-reverse"
+              } flex flex-col md:flex items-center gap-4 md:gap-8`}
+            >
                 {/* Timeline Icon */}
                 <div className="timeline-icon md:absolute relative md:left-1/2 transform md:-translate-x-1/2 z-20 mb-4 md:mb-0">
                   <div className={`p-4 rounded-full bg-gradient-to-r ${area.gradient} shadow-lg mx-auto`}>
