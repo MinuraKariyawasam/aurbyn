@@ -79,7 +79,7 @@ export default function FAQ() {
     return () => ctx.revert();
   }, []);
 
-  const toggleFAQ = (index: number) => {
+  const toggleFAQ = (index: number | null) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
