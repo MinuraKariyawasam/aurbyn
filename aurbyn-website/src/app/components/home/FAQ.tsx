@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, RefCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Plus, Minus } from 'lucide-react';
@@ -84,6 +84,13 @@ export default function FAQ() {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  const setFaqRef: RefCallback<HTMLDivElement> = (element: HTMLDivElement | null) => {
+    if (element) {
+      const index = parseInt(element.getAttribute('data-index') || '0');
+      faqRefs.current[index] = element;
+    }
+  };
+
   return (
     <section ref={sectionRef} className="py-24 bg-white">
       <div className="max-w-[1000px] mx-auto px-4">
@@ -100,7 +107,8 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              ref={el => faqRefs.current[index] = el}
+              data-index={index}
+              ref={setFaqRef}
               className="border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
             >
               <button
