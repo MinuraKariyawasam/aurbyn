@@ -14,7 +14,6 @@ interface CTASectionProps {
   buttonLink: string
 }
 
-// Pre-defined particle positions to avoid hydration mismatch
 const particlePositions = [
   { left: '20%', top: '10%' },
   { left: '80%', top: '15%' },
@@ -50,7 +49,6 @@ export default function CTASection({
     setIsClient(true)
     
     const ctx = gsap.context(() => {
-      // Floating animation for decoration elements
       gsap.to(".decoration-element", {
         y: "random(-20, 20)",
         x: "random(-20, 20)",
@@ -65,7 +63,6 @@ export default function CTASection({
         }
       });
 
-      // Glowing effect for particles
       gsap.to(".particle", {
         scale: "random(0.8, 1.2)",
         opacity: "random(0.4, 1)",
@@ -78,7 +75,6 @@ export default function CTASection({
         }
       });
 
-      // Entrance animations
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -119,7 +115,7 @@ export default function CTASection({
   return (
     <section 
       ref={sectionRef}
-      className="relative py-32 overflow-hidden"
+      className="relative py-16 md:py-32 overflow-hidden"
     >
       {/* Background with gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#2E294E] via-[#1B998B] to-[#2E294E]">
@@ -135,26 +131,26 @@ export default function CTASection({
         </div>
       </div>
 
-      {/* Floating decoration elements */}
+      {/* Floating decoration elements - Adjusted size for mobile */}
       <div ref={decorationRef} className="absolute inset-0 overflow-hidden">
         <div className="decoration-element absolute top-1/4 left-1/4 text-white/20">
-          <Globe className="w-16 h-16" />
+          <Globe className="w-12 h-12 md:w-16 md:h-16" />
         </div>
         <div className="decoration-element absolute top-1/3 right-1/4 text-white/20">
-          <Rocket className="w-12 h-12" />
+          <Rocket className="w-8 h-8 md:w-12 md:h-12" />
         </div>
         <div className="decoration-element absolute bottom-1/4 left-1/3 text-white/20">
-          <Sparkles className="w-10 h-10" />
+          <Sparkles className="w-8 h-8 md:w-10 md:h-10" />
         </div>
       </div>
 
-      {/* Glowing particles - Only rendered on client side */}
+      {/* Glowing particles */}
       {isClient && (
         <div className="absolute inset-0">
           {particlePositions.map((position, i) => (
             <div 
               key={i}
-              className="particle absolute w-2 h-2 bg-white rounded-full opacity-20"
+              className="particle absolute w-1.5 md:w-2 h-1.5 md:h-2 bg-white rounded-full opacity-20"
               style={position}
             />
           ))}
@@ -164,20 +160,20 @@ export default function CTASection({
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
-          <div className="inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white/90 text-sm font-medium mb-8">
+          <div className="inline-block px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/10 backdrop-blur-sm text-white/90 text-xs md:text-sm font-medium mb-6 md:mb-8">
             Fund I Now Open for Investment
           </div>
           
           <h2 
             ref={titleRef}
-            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            className="text-3xl md:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight"
           >
             {title}
           </h2>
           
           <p 
             ref={descRef}
-            className="text-xl text-white/80 max-w-3xl mx-auto mb-12"
+            className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-8 md:mb-12 px-4"
           >
             {description}
           </p>
@@ -185,25 +181,25 @@ export default function CTASection({
           <div ref={buttonRef}>
             <Link 
               href={buttonLink}
-              className="group inline-flex items-center gap-2 bg-[#FFD700] text-[#2E294E] px-8 py-4 rounded-lg font-medium transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="group inline-flex items-center gap-2 bg-[#FFD700] text-[#2E294E] px-6 md:px-8 py-3 md:py-4 rounded-lg font-medium transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl text-sm md:text-base"
             >
               {buttonText}
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
           </div>
 
-          <div className="mt-12 flex justify-center gap-8 text-white/80">
-            <div>
-              <div className="text-3xl font-bold text-[#FFD700]">$100M</div>
-              <div className="text-sm mt-1">Fund Size</div>
+          <div className="mt-8 md:mt-12 flex justify-center gap-4 md:gap-8 text-white/80">
+            <div className="px-2">
+              <div className="text-2xl md:text-3xl font-bold text-[#FFD700]">$100M</div>
+              <div className="text-xs md:text-sm mt-1">Fund Size</div>
             </div>
-            <div>
-              <div className="text-3xl font-bold text-[#FFD700]">15-20</div>
-              <div className="text-sm mt-1">Target Investments</div>
+            <div className="px-2">
+              <div className="text-2xl md:text-3xl font-bold text-[#FFD700]">15-20</div>
+              <div className="text-xs md:text-sm mt-1">Target Investments</div>
             </div>
-            <div>
-              <div className="text-3xl font-bold text-[#FFD700]">$0.5-2M</div>
-              <div className="text-sm mt-1">Investment Range</div>
+            <div className="px-2">
+              <div className="text-2xl md:text-3xl font-bold text-[#FFD700]">$0.5-2M</div>
+              <div className="text-xs md:text-sm mt-1">Investment Range</div>
             </div>
           </div>
         </div>
