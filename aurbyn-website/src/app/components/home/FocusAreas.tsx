@@ -6,17 +6,17 @@ import { Brain, Rocket, Database, Atom, ChevronRight, TrendingUp, Globe } from '
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface AreaFeature {
-  title: string;
-  description: string;
-  icon: JSX.Element;
-  gradient: string;
-  stats: {
-    growth: string;
-    market: string;
-  };
-  features: string[];
-}
+// interface AreaFeature {
+//   title: string;
+//   description: string;
+//   icon: JSX.Element;
+//   gradient: string;
+//   stats: {
+//     growth: string;
+//     market: string;
+//   };
+//   features: string[];
+// }
 
 
 
