@@ -3,26 +3,32 @@ import { Metadata } from 'next'
 import FeaturedVideo from '../components/interra/FeaturedVideo'
 import Services from '../components/interra/Services'
 import Impact from '../components/interra/Impact'
-import CTASection from '../components/shared/CTASection'
+import CTASection from '../components/shared/CTASectionInterra'
 import Hero from '../components/interra/Hero'
+import YouTubeSection from '../components/interra/YouTubeSection'
+import LatestVideos from '../components/interra/LatestVideos'
+import Testimonials from '../components/interra/Testimonials'
 
 export const metadata: Metadata = {
-  title: 'Interra | Tech Career Acceleration',
+  title: 'Aurbyn Academy | Tech Career Acceleration',
   description: 'Empowering tech undergraduates with mentorship, career coaching, and job preparation services.',
 }
 
 export default function InterraPage() {
   return (
     <>
-        <Hero/>
+      <Hero/>
+      <YouTubeSection />
       <FeaturedVideo />
+      <LatestVideos />
       <Services />
       <Impact />
+      <Testimonials />
       <CTASection 
-        title="Ready to Accelerate Your Career?" 
-        description="Join our community of aspiring tech professionals"
-        buttonText="Start Learning"
-        buttonLink="https://www.admeta.lk/careerboost"
+        title="Join Our Tech Success Community" 
+        description="Subscribe to our channel and accelerate your tech career journey"
+        buttonText="Subscribe Now"
+        buttonLink="https://youtube.com/interra"
       />
     </>
   )

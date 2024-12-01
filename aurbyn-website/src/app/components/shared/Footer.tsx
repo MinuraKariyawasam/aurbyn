@@ -6,8 +6,8 @@ import { ArrowUpRight, Twitter, Linkedin, Youtube, Send } from 'lucide-react'
 const footerLinks = {
   company: [
     { name: 'Ventures', href: '/ventures' },
-    { name: 'Interra', href: '/interra' },
-    { name: 'Approach', href: '/approach' },
+    { name: 'Academy', href: '/interra' },
+    { name: 'Labs', href: '/labs' },
   ],
   resources: [
     { name: 'Academy', href: '/academy' },

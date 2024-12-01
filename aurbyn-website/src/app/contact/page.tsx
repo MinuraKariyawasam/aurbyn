@@ -1,6 +1,5 @@
 // app/contact/page.tsx
 import ContactForm from '../components/contact/ContactForm'
-import ContactInfo from '../components/contact/ContactInfo'
 
 export const metadata = {
   title: 'Contact Us | Aurbyn',
@@ -9,11 +8,12 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="bg-white">
-      <div className="min-h-screen grid lg:grid-cols-2">
-        <ContactInfo />
-        <ContactForm />
+    <main className="min-h-screen bg-gradient-to-b from-[#2E294E] to-[#1B998B]/10 pt-32 pb-16 px-4">
+      <div className="max-w-2xl mx-auto">
+        <div className="animate-fadeIn">
+          <ContactForm />
+        </div>
       </div>
-    </div>
+    </main>
   )
 }
