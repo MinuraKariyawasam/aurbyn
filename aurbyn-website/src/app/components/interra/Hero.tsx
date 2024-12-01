@@ -1,3 +1,4 @@
+// aurbyn-website/src/app/components/interra/Hero.tsx
 import React from 'react';
 import { Play, Users, Youtube, ArrowRight, PlayCircle, Globe, Sparkles } from 'lucide-react';
 
