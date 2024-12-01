@@ -476,13 +476,13 @@ export default function ContactPage() {
                   { id: 'general', label: 'General' }
                 ].map((type, index) => (
                   <button
-                    key={type.id}
-                    onClick={() => handleTabChange(index, type.id as FormType)}
-                    className={`flex-1 min-w-[calc(50%-4px)] sm:min-w-0 py-2 sm:py-2.5 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 ${
-                      activeTab === index 
-                        ? 'bg-white/10 text-white shadow-sm' 
-                        : 'text-gray-400 hover:text-white'
-                    }`}
+                  key={type.id}
+                  onClick={() => handleTabChange(index, type.id as FormType)}
+                  className={`flex-1 min-w-[calc(50%-4px)] sm:min-w-0 py-2 sm:py-2.5 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 ${
+                    activeTab === index 
+                      ? 'bg-gradient-to-r from-[#2E294E] to-[#1B998B] text-white shadow-md' 
+                      : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10'
+                  }`}
                   >
                     {type.label}
                   </button>
