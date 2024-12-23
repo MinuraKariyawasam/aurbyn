@@ -7,6 +7,7 @@ import FocusAreas from '../app/components/home/FocusAreas'
 import SubBrands from '../app/components/home/SubBrands'
 import FAQ from '../app/components/home/FAQ'
 import CTASection from '../app/components/shared/CTASection'
+import ClientLayout from './components/layouts/ClientLayout'
 
 export const metadata: Metadata = {
   title: 'Aurbyn Capital - Backing the Next Wave of Tech Pioneers',
@@ -15,49 +16,46 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="relative overflow-hidden">
-      {/* Background gradient that spans multiple sections */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#2E294E] via-white to-white"/>
-      
-      {/* Content */}
-      <div className="relative">
-        <Hero />
+    <ClientLayout>
+      <main className="relative overflow-hidden">
+        {/* Background gradient that spans multiple sections */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2E294E] via-white to-white"/>
         
-        {/* Thesis section with overlap effect */}
-        <div className="relative -mt-20">
-          <InvestmentThesis />
+        {/* Content */}
+        <div className="relative">
+          <Hero />
+          
+          <div className="relative -mt-20">
+            <InvestmentThesis />
+          </div>
+          
+          <div className="relative -mt-16 bg-gradient-to-b from-transparent to-gray-50">
+            <InvestmentApproach />
+          </div>
+          
+          <div className="relative bg-white">
+            <FocusAreas />
+          </div>
+          
+          <div className="relative bg-gray-50">
+            <SubBrands />
+          </div>
+          
+          <div className="relative bg-white">
+            <FAQ />
+          </div>
+          
+          <div className="relative bg-gradient-to-br from-[#2E294E] via-[#1B998B] to-[#2E294E]">
+            <CTASection 
+              title="Ready to Build the Future?" 
+              description="Connect with us to explore how we can support your vision."
+              buttonText="Get in Touch"
+              buttonLink="/contact"
+            />
+          </div>
         </div>
-        
-        {/* Approach section with subtle connection to thesis */}
-        <div className="relative -mt-16 bg-gradient-to-b from-transparent to-gray-50">
-          <InvestmentApproach />
-        </div>
-        
-        {/* Focus Areas with clean transition */}
-        <div className="relative bg-white">
-          <FocusAreas />
-        </div>
-        
-        {/* Sub Brands with subtle background pattern */}
-        <div className="relative bg-gray-50">
-          <SubBrands />
-        </div>
-        
-        {/* FAQ section with clean design */}
-        <div className="relative bg-white">
-          <FAQ />
-        </div>
-        
-        {/* CTA with gradient background */}
-        <div className="relative bg-gradient-to-br from-[#2E294E] via-[#1B998B] to-[#2E294E]">
-          <CTASection 
-            title="Ready to Build the Future?" 
-            description="Connect with us to explore how we can support your vision."
-            buttonText="Get in Touch"
-            buttonLink="/contact"
-          />
-        </div>
-      </div>
-    </main>
+      </main>
+    </ClientLayout>
   )
 }
+
