@@ -48,7 +48,11 @@ export default function CTASection({
   useEffect(() => {
     setIsClient(true)
     
+    // Simple ScrollTrigger registration like the working example
+    gsap.registerPlugin(ScrollTrigger)
+    
     const ctx = gsap.context(() => {
+      // Continuous animations for decorative elements
       gsap.to(".decoration-element", {
         y: "random(-20, 20)",
         x: "random(-20, 20)",
@@ -75,6 +79,7 @@ export default function CTASection({
         }
       });
 
+      // Simplified ScrollTrigger setup like the working example
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -109,7 +114,10 @@ export default function CTASection({
       }, "-=0.6");
     });
 
-    return () => ctx.revert();
+    // Cleanup
+    return () => {
+      ctx.revert()
+    }
   }, []);
 
   return (

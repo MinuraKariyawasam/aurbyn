@@ -1,5 +1,17 @@
-// components/ventures/StartupJourney.tsx
-export default function StartupJourney() {
+"use client"
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+
+const StartupJourney = () => {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start']
+  });
+
+  const headerY = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], [150, -50]);
+
   const stages = [
     {
       stage: "Ideation & Validation",
@@ -49,24 +61,47 @@ export default function StartupJourney() {
         "Operational guidance"
       ]
     }
-  ]
+  ];
 
   return (
-    <section className="py-32 bg-gradient-to-b from-white to-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-[#2E294E] to-[#1B998B] bg-clip-text text-transparent">
+    <section ref={sectionRef} className="relative py-32 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <motion.div 
+          style={{ y: headerY }}
+          className="text-center mb-20"
+        >
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl font-bold mb-4 bg-gradient-to-r from-[#2E294E] to-[#1B998B] bg-clip-text text-transparent"
+          >
             Your Startup Journey
-          </h2>
-          <p className="text-xl text-gray-600/90 max-w-2xl mx-auto font-light">
+          </motion.h2>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-xl text-gray-600/90 max-w-2xl mx-auto font-light"
+          >
             We provide comprehensive support at every stage of your startup journey,
             from initial concept to market success.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-12">
+          </motion.p>
+        </motion.div>
+        
+        <motion.div 
+          style={{ y: cardsY }}
+          className="grid lg:grid-cols-3 gap-12"
+        >
           {stages.map((stage, index) => (
-            <div key={stage.stage} className="relative group">
+            <motion.div 
+              key={stage.stage} 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              className="relative group"
+            >
               {/* Connector line */}
               {index < stages.length - 1 && (
                 <div className="hidden lg:block absolute top-1/2 right-0 w-full h-0.5 bg-gradient-to-r from-[#1B998B]/20 to-[#2E294E]/20 transform translate-x-1/2" />
@@ -88,7 +123,10 @@ export default function StartupJourney() {
                   <p className="text-[#1B998B] font-medium mb-6">{stage.duration}</p>
                   
                   <div className="space-y-8">
-                    <div className="backdrop-blur-sm rounded-lg p-6 bg-gray-50/50">
+                    <motion.div 
+                      whileHover={{ scale: 1.02 }}
+                      className="backdrop-blur-sm rounded-lg p-6 bg-gray-50/50"
+                    >
                       <h4 className="font-semibold mb-4 text-[#2E294E]">Founder Focus</h4>
                       <ul className="space-y-3">
                         {stage.focus.map((item) => (
@@ -98,9 +136,12 @@ export default function StartupJourney() {
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </motion.div>
 
-                    <div className="backdrop-blur-sm rounded-lg p-6 bg-gray-50/50">
+                    <motion.div 
+                      whileHover={{ scale: 1.02 }}
+                      className="backdrop-blur-sm rounded-lg p-6 bg-gray-50/50"
+                    >
                       <h4 className="font-semibold mb-4 text-[#2E294E]">Our Support</h4>
                       <ul className="space-y-3">
                         {stage.support.map((item) => (
@@ -110,14 +151,16 @@ export default function StartupJourney() {
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default StartupJourney;

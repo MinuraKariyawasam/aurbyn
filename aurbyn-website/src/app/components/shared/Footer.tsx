@@ -5,12 +5,12 @@ import { ArrowUpRight, Twitter, Linkedin, Youtube, Send } from 'lucide-react'
 
 const footerLinks = {
   company: [
-    { name: 'Ventures', href: '/ventures' },
+    // { name: 'Ventures', href: '/ventures' },
     { name: 'Academy', href: '/interra' },
     { name: 'Labs', href: '/labs' },
   ],
   resources: [
-    { name: 'Academy', href: '/academy' },
+    { name: 'Blog', href: '/blog' },
     { name: 'FAQ', href: '/faq' },
   ],
   social: [

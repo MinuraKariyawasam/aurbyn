@@ -1,157 +1,184 @@
-// aurbyn-website/src/app/components/interra/Hero.tsx
-import React from 'react';
-import { Play, Users, Youtube, ArrowRight, PlayCircle, Globe, Sparkles } from 'lucide-react';
+"use client"
+import React, { useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Youtube, ArrowRight, Headphones, Play, Star, Users, ArrowUpRight } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen py-20 overflow-hidden bg-[#2E294E] flex items-center">
-      {/* Enhanced Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2E294E] via-[#2E294E] to-[#221f38]" />
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-        <div className="absolute right-0 w-[800px] h-[800px] bg-[#1B998B]/5 blur-[120px] rounded-full transform translate-x-1/2" />
-        <div className="absolute -left-40 w-[600px] h-[600px] bg-[#1B998B]/3 blur-[130px] rounded-full" />
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Gradient Mesh */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(17,24,39,1),rgba(0,0,0,1))]" />
+      <div className="absolute w-full h-full">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/30 rounded-full filter blur-[128px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/30 rounded-full filter blur-[128px]" />
       </div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        {/* Status Bar */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex flex-wrap items-center justify-center gap-4 mb-16"
+        >
+          <div className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10">
+            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+            <span className="text-white/80 text-sm font-medium">Live Now</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10">
+            <Star className="w-4 h-4 text-yellow-500" />
+            <span className="text-white/80 text-sm font-medium">4.9/5 Rating</span>
+          </div>
+          <div className="flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10">
+            <Users className="w-4 h-4 text-blue-500" />
+            <span className="text-white/80 text-sm font-medium">10K+ Community</span>
+          </div>
+        </motion.div>
+
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - Enhanced Content */}
-          <div className="space-y-10">
-            {/* Enhanced Stats Badge */}
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#1B998B]/20 to-[#1B998B]/10 
-                           text-[#1B998B] backdrop-blur-sm border border-[#1B998B]/20 
-                           hover:border-[#1B998B]/30 transition-all duration-300 cursor-pointer group">
-                <Youtube className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                <span className="text-sm font-medium">6K+ Subscribers</span>
-              </div>
-              <div className="h-6 w-px bg-[#1B998B]/20" />
-              <div className="text-[#1B998B]/80 text-sm">Join the Community</div>
-            </div>
-            
-            {/* Enhanced Headline */}
+          {/* Content */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="space-y-10"
+          >
             <div className="space-y-6">
-              <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight">
-                <div className="overflow-hidden">
-                  <span className="block hover:translate-x-2 transition-transform duration-300">
-                    Master Your
-                  </span>
-                </div>
-                <div className="overflow-hidden">
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#1B998B] to-[#1B998B]/80 
-                               hover:translate-x-2 transition-transform duration-300">
-                    Tech Career
-                  </span>
-                </div>
-                <div className="overflow-hidden">
-                  <span className="block hover:translate-x-2 transition-transform duration-300">
-                    Journey
-                  </span>
-                </div>
+              <h1 className="text-6xl lg:text-7xl font-bold tracking-tight">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-500 to-blue-600">
+                  Level Up
+                </span>
+                <br />
+                <span className="text-white">Your Tech</span>
+                <br />
+                <span className="text-white/80">Career Today</span>
               </h1>
               
-              <p className="text-xl text-gray-300/90 max-w-lg leading-relaxed">
-                Join our thriving YouTube community where we share insider tips, 
-                career strategies, and technical insights to help you succeed in tech.
+              <p className="text-lg text-white/60 max-w-md leading-relaxed">
+                Join our thriving community of tech professionals. Access cutting-edge resources and expert guidance.
               </p>
             </div>
-            
-            {/* Enhanced CTA Buttons */}
+
             <div className="flex flex-wrap gap-4">
-              <a 
-                href="https://www.youtube.com/@theinterra" 
-                className="group flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#1B998B] to-[#1B998B]/90 
-                         text-white rounded-xl font-semibold shadow-lg shadow-[#1B998B]/20
-                         hover:shadow-xl hover:shadow-[#1B998B]/30 transition-all duration-300 
-                         hover:-translate-y-0.5"
+              <motion.a
+                href="https://www.youtube.com/@theinterra"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-emerald-500 to-blue-600 
+                         rounded-2xl font-semibold text-white shadow-lg shadow-emerald-500/20
+                         hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-300"
               >
-                <Youtube className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                <Youtube className="w-5 h-5" />
                 <span>Subscribe Now</span>
-                <ArrowRight className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-              </a>
-              <a 
-                href="https://www.youtube.com/playlist?list=PLOQDoNwLXrmf_vk8vTInrafUO5Y0T2TXJ" 
-                className="group flex items-center gap-2 px-8 py-4 bg-white/10 text-white rounded-xl font-semibold 
-                         backdrop-blur-sm border border-white/10 hover:bg-white/20 
-                         transition-all duration-300 hover:-translate-y-0.5"
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </motion.a>
+
+              <motion.a
+                href="https://creators.spotify.com/pod/show/minura-kariyawasam"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="group flex items-center gap-3 px-8 py-4 bg-white/5 backdrop-blur-xl 
+                         rounded-2xl font-semibold text-white border border-white/10
+                         hover:bg-white/10 transition-all duration-300"
               >
-                <PlayCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span>Watch Podcasts</span>
-                <ArrowRight className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-              </a>
+                <Headphones className="w-5 h-5" />
+                <span>Listen Now</span>
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </motion.a>
             </div>
 
-            {/* Added Features List */}
-            <div className="flex gap-8 pt-8">
+            <div className="pt-8 grid grid-cols-2 gap-6">
               {[
-                { number: '50+', label: 'Video Tutorials' },
-                { number: '24/7', label: 'Community Support' },
-                { number: '85%', label: 'Success Rate' }
-              ].map((stat) => (
-                <div key={stat.label} className="space-y-1">
-                  <div className="text-2xl font-bold text-white">{stat.number}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
-                </div>
+                { icon: '🎯', title: 'Career Growth', desc: 'Expert guidance & mentoring' },
+                { icon: '🎓', title: 'Weekly Content', desc: 'Fresh tutorials & insights' },
+                { icon: '💡', title: 'Live Sessions', desc: 'Interactive learning' },
+                { icon: '🤝', title: 'Community', desc: 'Network with peers' }
+              ].map((feature, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 + index * 0.1 }}
+                  className="p-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10"
+                >
+                  <span className="text-2xl mb-2 block">{feature.icon}</span>
+                  <h3 className="font-semibold text-white mb-1">{feature.title}</h3>
+                  <p className="text-sm text-white/60">{feature.desc}</p>
+                </motion.div>
               ))}
             </div>
-          </div>
-          
-          {/* Right Column - Enhanced Card */}
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1B998B]/20 to-transparent blur-3xl" />
-            <div className="relative bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl p-8 border border-white/20
-                         hover:shadow-[0_20px_50px_rgba(27,153,139,0.2)] hover:border-[#1B998B]/30
-                         transform hover:scale-[1.02] transition-all duration-500">
-              <div className="absolute -top-4 -right-4 bg-gradient-to-r from-[#1B998B] to-[#1B998B]/90 
-                           text-white px-6 py-2 rounded-xl shadow-lg
-                           hover:shadow-[#1B998B]/20 hover:scale-105 transition-all duration-300">
-                <span className="font-medium flex items-center gap-2">
-                  <Sparkles className="w-4 h-4" />
-                  New Video Every Week!
-                </span>
-              </div>
-              
+          </motion.div>
+
+          {/* Video Section */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+            className="relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-3xl blur-3xl" />
+            <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10">
               <div className="space-y-8">
-                {[
-                  {
-                    icon: Youtube,
-                    title: "Expert Content",
-                    desc: "In-depth tech career guidance from industry experts"
-                  },
-                  {
-                    icon: Users,
-                    title: "Growing Community",
-                    desc: "Connect and learn with fellow tech aspirants"
-                  },
-                  {
-                    icon: Globe,
-                    title: "Weekly Updates",
-                    desc: "Stay updated with latest tech trends and opportunities"
-                  }
-                ].map((item) => (
-                  <div 
-                    key={item.title}
-                    className="flex items-start gap-6 group hover:translate-x-2 transition-all duration-300"
-                  >
-                    <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center 
-                                bg-gradient-to-br from-[#1B998B]/20 to-[#1B998B]/10 rounded-xl
-                                group-hover:from-[#1B998B]/30 group-hover:to-[#1B998B]/20
-                                transition-all duration-300">
-                      <item.icon className="w-7 h-7 text-[#1B998B] group-hover:scale-110 transition-transform" />
+                {/* Header */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-600 
+                                  flex items-center justify-center text-white text-xl font-bold">
+                      T
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-[#1B998B] transition-colors">
-                        {item.title}
-                      </h3>
-                      <p className="text-gray-400">{item.desc}</p>
+                      <h3 className="text-white font-medium">Latest Episode</h3>
+                      <p className="text-white/60 text-sm">Tech Career Insights</p>
                     </div>
                   </div>
-                ))}
+                  <motion.a
+                    href="https://youtu.be/XkJNhjndLTU?si=qqFBUqZw8CYRV3TU"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-blue-600 
+                              rounded-xl flex items-center justify-center"
+                  >
+                    <Play className="w-6 h-6 text-white" fill="white" />
+                  </motion.a>
+                </div>
+
+                {/* Video */}
+                <div className="aspect-video rounded-2xl overflow-hidden bg-black/50">
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/XkJNhjndLTU"
+                    title="Latest Episode"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-4">
+                  {[
+                    { value: '2.1K', label: 'Views' },
+                    { value: '1.2K', label: 'Likes' },
+                    { value: '234', label: 'Comments' }
+                  ].map((stat, index) => (
+                    <div 
+                      key={index} 
+                      className="p-4 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 text-center"
+                    >
+                      <div className="text-white font-semibold mb-1">{stat.value}</div>
+                      <div className="text-white/60 text-sm">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
