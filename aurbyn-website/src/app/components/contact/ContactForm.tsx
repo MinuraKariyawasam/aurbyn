@@ -1,6 +1,6 @@
 "use client"
 import { useState } from 'react'
-import { Send, Loader2, Check, AlertCircle } from 'lucide-react'
+import { Send, Check, Loader2, AlertCircle, Globe, Sparkles, Target, Users, ArrowRight, Star } from 'lucide-react';
 import { useRouter } from 'next/navigation'
 
 type FormType = 'fund' | 'academy' | 'labs' | 'general'
@@ -461,8 +461,52 @@ export default function ContactPage() {
     setFormType(type)
   }
 
+   // Stats with icons
+   const stats = [
+    { icon: Globe, label: 'Portfolio Companies', value: '50+' },
+    { icon: Users, label: 'Combined Exits', value: '$2B+' },
+    { icon: Target, label: 'Fund Size', value: '$100M' },
+    { icon: Star, label: 'Investments', value: '12/yr' }
+  ];
+
   return (
     <main className="min-h-screen pt-16 sm:pt-32 pb-16 px-4">
+          <div className="max-w-7xl mx-auto">
+        {/* Hero Section */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full mb-6">
+            <Sparkles className="w-4 h-4 text-[#1B998B]" />
+            <span className="text-sm text-gray-400">Backing Visionary Founders</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+            Building The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2E294E] to-[#1B998B]">Next Generation</span> of Tech
+          </h1>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+            We partner with exceptional founders building category-defining companies.
+            If you're ready to scale your vision, let's connect.
+          </p>
+        </div>
+
+        {/* Stats Grid */}
+        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          {stats.map((stat, index) => (
+            <div key={index} 
+                 className="bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-2xl p-6 
+                          transform hover:scale-105 transition-all duration-300 group">
+              <div className="flex items-center gap-4 mb-3">
+                <div className="p-3 bg-gradient-to-r from-[#2E294E] to-[#1B998B] rounded-lg 
+                              group-hover:shadow-lg group-hover:shadow-[#1B998B]/20 transition-all">
+                  <stat.icon className="w-5 h-5 text-white" />
+                </div>
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-2xl font-bold text-white">{stat.value}</h3>
+                <p className="text-gray-400 text-sm">{stat.label}</p>
+              </div>
+            </div>
+          ))}
+        </div> */}
+
       <div className="max-w-2xl mx-auto">
         <div className="relative">
           <div className="relative bg-white/[0.03] backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl border border-white/10">
@@ -611,6 +655,7 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+          </div>
       </div>
     </main>
   )

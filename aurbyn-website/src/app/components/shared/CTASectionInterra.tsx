@@ -201,15 +201,15 @@ export default function CTASection({
 
           <div className="mt-8 md:mt-12 flex justify-center gap-4 md:gap-8 text-white/80">
             <div className="px-2">
-              <div className="text-2xl md:text-3xl font-bold text-[#1B998B]">50K+</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#1B998B]">6K+</div>
               <div className="text-xs md:text-sm mt-1">Subscribers</div>
             </div>
             <div className="px-2">
-              <div className="text-2xl md:text-3xl font-bold text-[#1B998B]">100+</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#1B998B]">10+</div>
               <div className="text-xs md:text-sm mt-1">Videos</div>
             </div>
             <div className="px-2">
-              <div className="text-2xl md:text-3xl font-bold text-[#1B998B]">85%</div>
+              <div className="text-2xl md:text-3xl font-bold text-[#1B998B]">95%</div>
               <div className="text-xs md:text-sm mt-1">Success Rate</div>
             </div>
           </div>
