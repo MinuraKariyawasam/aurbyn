@@ -1,0 +1,12 @@
+main = ".open-next/worker.js"
+name = "aurbyn"
+ 
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+ 
+# The binding name must be "ASSETS" when the cache is enabled
+assets = { directory = ".open-next/assets", binding = "ASSETS" }
+
+[[kv_namespaces]]
+binding = "aurbyn"
+id = "e3b622ff35614ae4bf1ad5d11ccc7b25"
