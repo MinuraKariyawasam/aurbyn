@@ -114,12 +114,12 @@ export default function Hero() {
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
           <Link 
-            href="/thesis"
+            href="/newsletter"
             className="border-2 border-white/80 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-medium 
               backdrop-blur-sm hover:bg-white/10 transition-all duration-200
               active:transform active:translate-y-0.5 text-sm sm:text-base"
           >
-            Our Thesis
+            Investment Insider
           </Link>
         </div>
       </div>

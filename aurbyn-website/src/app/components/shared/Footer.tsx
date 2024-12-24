@@ -85,44 +85,16 @@ export default function Footer() {
         {/* Newsletter Section - Centered */}
         <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16 relative">
           <h3 className="text-lg sm:text-xl font-semibold text-[#1B998B] mb-3 sm:mb-4">
-            Join Our Newsletter
+          Building Tomorrow's Tech, Today
           </h3>
-          <p className="text-base sm:text-lg text-gray-300 mb-6 sm:mb-8 max-w-xl mx-auto px-2">
-            Stay ahead with insights on emerging technologies, investment trends, and industry innovations.
+          <p className="text-base sm:text-lg text-gray-300 mb-6 sm:mb-6 max-w-xl mx-auto px-2">
+          Join us in shaping the future of technology through innovation and strategic growth
           </p>
-          <form onSubmit={handleSubmit} className="relative max-w-md mx-auto px-2">
-            <div className="relative group">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-4 pr-12 py-3 sm:py-3.5 text-white placeholder-gray-400 
-                  focus:outline-none focus:ring-2 focus:ring-[#1B998B]/50 focus:border-transparent
-                  transition-all duration-300 group-hover:border-white/20"
-                required
-                disabled={status === 'loading'}
-              />
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 sm:p-2.5 bg-[#1B998B] rounded-lg 
-                  hover:bg-[#1B998B]/80 transition-all duration-300 group-hover:scale-95 hover:rotate-12
-                  disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Send className={`w-4 h-4 ${status === 'loading' ? 'animate-spin' : ''}`} />
-              </button>
-            </div>
-            {message && (
-              <div className="absolute -bottom-8 left-0 right-0 text-center">
-                <p className={`text-sm animate-fade-in-up ${
-                  status === 'success' ? 'text-[#1B998B]' : 'text-red-400'
-                }`}>
-                  {message}
-                </p>
-              </div>
-            )}
-          </form>
+          <p>______</p>
+          <Link href="/newsletter" className="inline-flex items-center mt-6 text-[#1B998B] hover:text-[#1B998B]/80 transition-colors">
+            <span>Subscribe to our updates</span>
+            <ArrowUpRight className="ml-1 h-4 w-4" />
+          </Link>
         </div>
 
         {/* Main Footer Content */}
