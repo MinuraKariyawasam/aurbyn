@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import StickyCursor from '../components/StickyCursor';
 import { Send, Check, BookOpen, Target, Users, Zap } from 'lucide-react';
 
+
 const subscriptionTypes = [
  {
    id: 'career',
