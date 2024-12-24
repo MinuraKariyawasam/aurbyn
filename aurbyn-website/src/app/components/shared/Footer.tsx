@@ -1,22 +1,22 @@
 'use client'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { ArrowUpRight, Twitter, Linkedin, Youtube, Send } from 'lucide-react'
+import { ArrowUpRight, Twitter, Linkedin, Youtube, Send, Facebook } from 'lucide-react'
 
 const footerLinks = {
   company: [
     // { name: 'Ventures', href: '/ventures' },
-    { name: 'Academy', href: '/interra' },
+    { name: 'Academy', href: '/academy' },
     { name: 'Labs', href: '/labs' },
   ],
   resources: [
-    { name: 'Blog', href: '/blog' },
-    { name: 'FAQ', href: '/faq' },
+    { name: 'Community', href: 'https://web.facebook.com/groups/softwareengineerundergraduatesclub' },
+    { name: 'Founder\'s Corner', href: 'https://x.com/MBKariyawasam' },
   ],
   social: [
-    { name: 'Twitter', href: '#', icon: Twitter },
-    { name: 'LinkedIn', href: '#', icon: Linkedin },
-    { name: 'YouTube', href: '#', icon: Youtube },
+    { name: 'FaceBook', href: 'https://web.facebook.com/Interra.lk/', icon: Facebook },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/company/igniteig/', icon: Linkedin },
+    { name: 'YouTube', href: 'https://www.youtube.com/@theinterra/', icon: Youtube },
   ],
 }
 
@@ -28,18 +28,45 @@ const office = {
 export default function Footer() {
   const [year, setYear] = useState('')
   const [email, setEmail] = useState('')
-  const [isSubscribed, setIsSubscribed] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     setYear(new Date().getFullYear().toString())
   }, [])
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsSubscribed(true)
-    setEmail('')
+    
+    try {
+      setStatus('loading')
+      
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setStatus('success')
+        setMessage('✨ Thanks for subscribing!')
+        setEmail('')
+      } else {
+        throw new Error(data.error || 'Something went wrong')
+      }
+    } catch (error) {
+      setStatus('error')
+      setMessage('Failed to subscribe. Please try again.')
+    }
+
+    // Reset status after 3 seconds
     setTimeout(() => {
-      setIsSubscribed(false)
+      setStatus('idle')
+      setMessage('')
     }, 3000)
   }
 
@@ -74,19 +101,24 @@ export default function Footer() {
                   focus:outline-none focus:ring-2 focus:ring-[#1B998B]/50 focus:border-transparent
                   transition-all duration-300 group-hover:border-white/20"
                 required
+                disabled={status === 'loading'}
               />
               <button
                 type="submit"
+                disabled={status === 'loading'}
                 className="absolute right-2 top-1/2 -translate-y-1/2 p-2 sm:p-2.5 bg-[#1B998B] rounded-lg 
-                  hover:bg-[#1B998B]/80 transition-all duration-300 group-hover:scale-95 hover:rotate-12"
+                  hover:bg-[#1B998B]/80 transition-all duration-300 group-hover:scale-95 hover:rotate-12
+                  disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Send className="w-4 h-4" />
+                <Send className={`w-4 h-4 ${status === 'loading' ? 'animate-spin' : ''}`} />
               </button>
             </div>
-            {isSubscribed && (
+            {message && (
               <div className="absolute -bottom-8 left-0 right-0 text-center">
-                <p className="text-sm text-[#1B998B] animate-fade-in-up">
-                  ✨ Thanks for subscribing!
+                <p className={`text-sm animate-fade-in-up ${
+                  status === 'success' ? 'text-[#1B998B]' : 'text-red-400'
+                }`}>
+                  {message}
                 </p>
               </div>
             )}
